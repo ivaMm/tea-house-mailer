@@ -1,0 +1,11 @@
+Hey <%= @user.name %>!
+
+==============================
+
+Welcome to Tea House newsletter!
+This is where you'll get your daily dose of tea emojis
+
+<% emojis = '🍵' * rand(10...30) %>
+<% rand(3...8).times do %>
+  <%= emojis %>
+<% end %>

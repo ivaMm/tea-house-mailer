@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  <h1>Hey <%= @user.name %>!</h1>
+  <p> Welcome to Tea House newsletter! </p>
+  <p> This is where you'll get your daily dose of tea emojis!</p>
+  <br/>
+  <% emojis = '🍵' * rand(10...30) %>
+  <% rand(3...8).times do %>
+    <p><%= @emojis %></p>
+  <% end %>
+  </body>
+</html>
