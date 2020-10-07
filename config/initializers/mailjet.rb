@@ -2,7 +2,7 @@
 Mailjet.configure do |config|
   config.api_key = ENV['MJ_APIKEY_PUBLIC']
   config.secret_key = ENV['MJ_APIKEY_PRIVATE']
-  config.default_from = 'teahouse@teahouse.space'
+  config.default_from = 'teahouseteam@teahouse.space'
   config.api_version = "v3.1"
   config.end_point = "https://api.us.mailjet.com"
   # Mailjet API v3.1 is at the moment limited to Send API.
