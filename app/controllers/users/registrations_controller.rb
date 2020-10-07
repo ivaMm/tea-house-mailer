@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
 
-    if resource.save
+    resource.save
       TeaMailer.welcome_email(resource).deliver_now!
 
     yield resource if block_given?
@@ -32,7 +32,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       set_minimum_password_length
       respond_with resource
     end
-  end
   end
 
   # GET /resource/edit
