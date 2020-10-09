@@ -1,1 +1,25 @@
 // Specific CSS for your home-page
+body {
+  background-color: #400d40;
+  color: white;
+  background-image: asset_url('babak.jpg');
+}
+
+.container-home {
+  text-align: center;
+  padding: 56px 32px;
+}
+
+.link-devise {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px;
+  border-width: 2px;
+  margin: 4px;
+}
+
+.link-devise:hover {
+  text-decoration: none;
+  color: #fc03a9;
+}
