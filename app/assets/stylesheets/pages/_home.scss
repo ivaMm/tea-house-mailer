@@ -1,8 +1,9 @@
 // Specific CSS for your home-page
 body {
-  background-color: #400d40;
+  background-color: darkblue;
   color: white;
   background-image: asset_url('babak.jpg');
+  background-size: cover;
 }
 
 .container-home {
@@ -21,5 +22,17 @@ body {
 
 .link-devise:hover {
   text-decoration: none;
-  color: #fc03a9;
+  color: orange;
+}
+
+.link-user {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0;
+}
+
+.link-user:hover {
+  text-decoration: none;
+  color: orange;
 }

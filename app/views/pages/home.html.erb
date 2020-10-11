@@ -1,12 +1,13 @@
 <div class="container-home">
   <% if current_user %>
-    <h1>Welcome <%= current_user.name.capitalize %> to Tea House!</h1>
-     <div class="nav-item">
+    <h1 style="color: orange;">Hello <%= current_user.name.capitalize %>!</h1>
+    <p> Nothing to see here. Please, go home. We will write you.</p>
+     <div class="nav-item" style="position: absolute; bottom: 5%; left: 87%;">
        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "link-devise" %>
        <%= link_to "Edit", edit_user_registration_path(current_user), class: "link-devise" %>
     </div>
   <% else %>
-    <h1 style="padding: 8px 0;">Welcome to Tea House :)</h1>
+    <h1 style="padding: 8px 0; color: orange;">Welcome to Tea House :)</h1>
     <p>Please sign up or log in to proceed:</p>
     <br>
     <div class="nav-item">
@@ -14,4 +15,5 @@
       <%= link_to "Login", new_user_session_path, class: "link-devise" %>
     </div>
   <% end %>
+  <h6 style="position: absolute; bottom: 5%;">Image Credit: ESO/B. Tafreshi (<%= link_to 'twanight.org', 'http://www.twanight.org/newTWAN/photographers_about.asp?photographer=Babak%20A.%20Tafreshi', target: :_blank %>)</h6>
 </div>
