@@ -1,3 +1,5 @@
 <%= @user.poem.title %>
 by <%= @user.poem.author %>
-<%= @user.poem.content %>
+<% @user.poem.content.split("\n").each do |line| %>
+  <%= line %><br/>
+<% end %>

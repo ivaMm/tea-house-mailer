@@ -6,6 +6,8 @@
   <body>
     <h1><%= @user.poem.title %></h1>
     <p>by <%= @user.poem.author %></p>
-    <p><%= @user.poem.content %></p>
+    <% @user.poem.content.split("\n").each do |line| %>
+      <%= line %><br/>
+    <% end %>
   </body>
 </html>
