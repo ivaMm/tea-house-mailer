@@ -1,5 +1,5 @@
 class TeaMailer < ApplicationMailer
-   def welcome_email(user)
+  def welcome_email(user)
     @user = user
     mail(
       from: "Tea House<teahouseteam@teahouse.space>",
@@ -16,7 +16,7 @@ class TeaMailer < ApplicationMailer
     mail(
       from: "Tea House<teahouse@teahouse.space>",
       to: @user.email,
-      subject: "#{@poem.title}") do |format|
+      subject: "Your daily poem: #{@poem.title}") do |format|
         format.html { render 'daily_poem.html.erb' }
         format.text { render plain: 'daily_poem.text.erb' }
       end
