@@ -22,5 +22,3 @@ class TeaMailer < ApplicationMailer
       end
   end
 end
-
-num = rand(1..1095)
