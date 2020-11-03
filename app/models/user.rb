@@ -3,4 +3,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  has_one :poem
+
+  def self.send_daily_poem
+    User.all.each do |user|
+      TeaMailer.daily_poem(user).deliver_now!
+    end
+  end
 end

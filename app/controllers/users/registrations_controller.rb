@@ -15,6 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     resource.save
       TeaMailer.welcome_email(resource).deliver_now!
+    r# create_poem
 
     yield resource if block_given?
     if resource.persisted?
