@@ -1,3 +1,6 @@
+require 'json'
+require 'open-uri'
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -5,11 +8,26 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one :poem, dependent: :destroy
 
-=begin
   def self.send_daily_poem
     User.all.each do |user|
-      TeaMailer.daily_poem(user).deliver_now!
+      today = Date.current
+      poem = user.poem
+      poem_date = (poem.updated_at).to_date
+      if today > poem_date
+        generate_daily_poem(user)
+        TeaMailer.daily_poem(user).deliver_now!
+      end
     end
   end
-=end
+
+  def generate_daily_poem(user)
+    num = rand(1..1095)
+    url = "http://poetry-api.herokuapp.com/api/v1/poems/#{num}"
+    poem_serialized = open(url).read
+    poem = JSON.parse(poem_serialized)
+    author = poem['author']['name']
+    title = poem['title']
+    content = poem['content']
+    user.poem.update!(user_id: user.id, author: author, title: title, content: content)
+  end
 end
