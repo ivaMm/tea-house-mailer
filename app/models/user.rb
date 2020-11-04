@@ -15,9 +15,9 @@ class User < ApplicationRecord
       poem_date = (poem.updated_at).to_date
       if today > poem_date
         generate_daily_poem(user)
-        if Time.now.strftime("%H:%M") == "8:00"
+        # if Time.now.strftime("%H:%M") == "8:00"
           TeaMailer.daily_poem(user).deliver_now!
-        end
+        # end
       end
     end
   end
