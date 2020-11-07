@@ -10,15 +10,8 @@ class User < ApplicationRecord
 
   def self.send_daily_poem
     User.all.each do |user|
-      today = Date.current
-      poem = user.poem
-      poem_date = (poem.updated_at).to_date
-      if today > poem_date
-        generate_daily_poem(user)
-        # if Time.now.strftime("%H:%M") == "8:00"
-          TeaMailer.daily_poem(user).deliver_now!
-        # end
-      end
+      poem = generate_daily_poem(user)
+      TeaMailer.daily_poem(poem).deliver_now!
     end
   end
 
