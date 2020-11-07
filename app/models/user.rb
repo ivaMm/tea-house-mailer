@@ -10,19 +10,15 @@ class User < ApplicationRecord
 
   def self.send_daily_poem
     User.all.each do |user|
-      poem = generate_daily_poem(user)
-      TeaMailer.daily_poem(poem).deliver_now!
+      num = rand(1..1095)
+      url = "http://poetry-api.herokuapp.com/api/v1/poems/#{num}"
+      poem_serialized = open(url).read
+      poem = JSON.parse(poem_serialized)
+      author = poem['author']['name']
+      title = poem['title']
+      content = poem['content']
+      user.poem.update!(user_id: user.id, author: author, title: title, content: content)
+      TeaMailer.daily_poem(user).deliver_now!
     end
-  end
-
-  def generate_daily_poem(user)
-    num = rand(1..1095)
-    url = "http://poetry-api.herokuapp.com/api/v1/poems/#{num}"
-    poem_serialized = open(url).read
-    poem = JSON.parse(poem_serialized)
-    author = poem['author']['name']
-    title = poem['title']
-    content = poem['content']
-    user.poem.update!(user_id: user.id, author: author, title: title, content: content)
   end
 end
