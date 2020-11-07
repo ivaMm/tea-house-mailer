@@ -12,11 +12,11 @@ class TeaMailer < ApplicationMailer
 
   def daily_poem(user)
     @user = user
-    @poem = user.poem
+    @poem = @user.poem
     mail(
       from: "Tea House<teahouse@teahouse.space>",
       to: @user.email,
-      subject: "#{@poem.title}") do |format|
+      subject: "Your daily poem: #{@poem.title}") do |format|
         format.html { render 'daily_poem.html.erb' }
         format.text { render plain: 'daily_poem.text.erb' }
       end
