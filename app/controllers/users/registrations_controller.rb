@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require 'json'
 require 'open-uri'
+require 'nokogiri'
 
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
@@ -87,7 +88,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create_poem(resource)
-    num = rand(1..1095)
+    url = "https://poetry-api.herokuapp.com/"
+    html_doc = Nokogiri::HTML(open(url))
+    last_num = html_doc.search('span#last-p').text.strip
+    num = rand(1..last_num.to_i)
     url = "http://poetry-api.herokuapp.com/api/v1/poems/#{num}"
     poem_serialized = open(url).read
     poem = JSON.parse(poem_serialized)
