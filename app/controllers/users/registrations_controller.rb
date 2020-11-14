@@ -1,7 +1,4 @@
 # frozen_string_literal: true
-require 'json'
-require 'open-uri'
-require 'nokogiri'
 
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
@@ -17,11 +14,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
 
     resource.save
-      TeaMailer.welcome_email(resource).deliver_now!
-
-    # create_poem
-    create_poem(resource)
-    TeaMailer.daily_poem(resource).deliver_now!
+    TeaMailer.welcome_email(resource).deliver_now!
 
     yield resource if block_given?
     if resource.persisted?
@@ -85,19 +78,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
     super(resource)
-  end
-
-  def create_poem(resource)
-    url = "https://poetry-api.herokuapp.com/"
-    html_doc = Nokogiri::HTML(open(url))
-    last_num = html_doc.search('span#last-p').text.strip
-    num = rand(1..last_num.to_i)
-    url = "http://poetry-api.herokuapp.com/api/v1/poems/#{num}"
-    poem_serialized = open(url).read
-    poem = JSON.parse(poem_serialized)
-    author = poem['author']['name']
-    title = poem['title']
-    content = poem['content']
-    Poem.create(user_id: resource.id, author: author, title: title, content: content)
   end
 end
