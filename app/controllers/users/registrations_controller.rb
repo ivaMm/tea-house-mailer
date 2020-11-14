@@ -14,6 +14,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
 
     resource.save
+    TeaMailer.welcome_email(resource).deliver_now!
 
     yield resource if block_given?
     if resource.persisted?

@@ -7,41 +7,31 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_one :poem, dependent: :destroy
-  after_create :send_welcome
   after_create :send_poem
 
-  def send_welcome
-    TeaMailer.welcome_email(self).deliver_now!
-  end
-
   def send_poem
-    create_poem(self)
+    Poem.create!(build_poem(self))
     TeaMailer.daily_poem(self).deliver_now!
   end
 
   def self.send_daily_poem
     User.all.each do |user|
-      id = random_id
-      url = "http://poetry-api.herokuapp.com/api/v1/poems/#{id}"
-      poem_serialized = open(url).read
-      poem = JSON.parse(poem_serialized)
-      author = poem['author']['name']
-      title = poem['title']
-      content = poem['content']
-      user.poem.update!(user_id: user.id, author: author, title: title, content: content)
+      user.poem.update!(build_poem(user))
       TeaMailer.daily_poem(user).deliver_now!
     end
   end
 
-  def create_poem(user)
+  def build_poem(user)
     id = random_poem
     url = "http://poetry-api.herokuapp.com/api/v1/poems/#{id}"
     poem_serialized = open(url).read
     poem = JSON.parse(poem_serialized)
-    author = poem['author']['name']
-    title = poem['title']
-    content = poem['content']
-    Poem.create(user_id: user.id, author: author, title: title, content: content)
+    {
+      user_id: user.id,
+      author: poem['author']['name'],
+      title: poem['title'],
+      content: poem['content']
+    }
   end
 
   def random_poem
