@@ -49,7 +49,7 @@ class User < ApplicationRecord
     serialized = open(url).read
     poems = JSON.parse(serialized)
     last = poems['count'] - 1 # get total number of poems (-1 bc indexes start from 0!)
-    inx = rand(0..1885)
+    inx = rand(0..last)
     poems[inx]['id']
   end
 end
