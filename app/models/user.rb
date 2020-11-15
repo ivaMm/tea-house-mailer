@@ -16,7 +16,20 @@ class User < ApplicationRecord
 
   def self.send_daily_poem
     User.all.each do |user|
-      user.poem.update!(build_poem(user))
+      # user.poem.update!(build_poem(user))
+      url1 = "http://poetry-api.herokuapp.com/api/v1/poems/"
+      serialized = open(url1).read
+      poems = JSON.parse(serialized)
+      last = poems['count']
+      inx = rand(0...last)
+      id = poems['poems'][inx]['id']
+      url = "http://poetry-api.herokuapp.com/api/v1/poems/#{id}"
+      poem_serialized = open(url).read
+      poem = JSON.parse(poem_serialized)
+      author = poem['author']['name']
+      title = poem['title']
+      content = poem['content']
+      user.poem.update!(user_id: user.id, author: author, title: title, content: content)
       TeaMailer.daily_poem(user).deliver_now!
     end
   end
@@ -38,8 +51,8 @@ class User < ApplicationRecord
     url = "http://poetry-api.herokuapp.com/api/v1/poems/"
     serialized = open(url).read
     poems = JSON.parse(serialized)
-    last = poems['count'] - 1 # get total number of poems (-1 bc indexes start from 0!)
-    inx = rand(0..last)
-    poems[inx]['id']
+    last = poems['count']
+    inx = rand(0...last)
+    poems['poems'][inx]['id']
   end
 end
