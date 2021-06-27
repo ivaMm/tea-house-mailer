@@ -2,18 +2,22 @@
   <% if current_user %>
     <h1 style="color: orange;">Hello <%= current_user.name.capitalize %>!</h1>
     <p> Nothing to see here. Please, go home. We will write you.</p>
-     <div class="nav-item" style="position: absolute; bottom: 5%; left: 87%;">
-       <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "link-devise" %>
-       <%= link_to "Edit", edit_user_registration_path(current_user), class: "link-devise" %>
+     <div class="nav-item user">
+       <p class='img-credit'>Image Credit: ESO/B. Tafreshi (<%= link_to 'twanight.org', 'http://www.twanight.org/newTWAN/photographers_about.asp?photographer=Babak%20A.%20Tafreshi', target: :_blank %>)</p>
+       <div>
+         <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "link-devise" %>
+         <%= link_to "Edit", edit_user_registration_path(current_user), class: "link-devise" %>
+       </div>
     </div>
   <% else %>
     <h1 style="padding: 8px 0; color: orange;">Welcome to Tea House :)</h1>
     <p>Please sign up or log in to proceed:</p>
     <br>
-    <div class="nav-item">
+    <div class="nav-item no-user">
       <%= link_to "Sign up", new_user_registration_path, class: "link-devise" %>
       <%= link_to "Log in", new_user_session_path, class: "link-devise" %>
     </div>
+    <p class='img-credit no-user'>Image Credit: ESO/B. Tafreshi (<%= link_to 'twanight.org', 'http://www.twanight.org/newTWAN/photographers_about.asp?photographer=Babak%20A.%20Tafreshi', target: :_blank %>)</p>
   <% end %>
-  <h6 style="position: absolute; bottom: 5%;">Image Credit: ESO/B. Tafreshi (<%= link_to 'twanight.org', 'http://www.twanight.org/newTWAN/photographers_about.asp?photographer=Babak%20A.%20Tafreshi', target: :_blank %>)</h6>
+
 </div>
