@@ -1,14 +1,26 @@
 // Specific CSS for your home-page
-body {
+
+.background-img {
   background-color: darkblue;
   color: white;
   background-image: asset_url('babak.jpg');
   background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+  position: fixed;
+  width: 100%;
+  padding: 24px;
 }
+
 
 .container-home {
   text-align: center;
   padding: 56px 32px;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .link-devise {
