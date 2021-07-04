@@ -1,9 +1,9 @@
 class TeaMailer < ApplicationMailer
-  def welcome_email(user)
-    @user = user
+  def welcome_email
+    #@user = user
     mail(
       from: "Tea House<teahouseteam@teahouse.space>",
-      to: @user.email,
+      to: params[:user].email, #@user.email,
       subject: 'Hello from TeaHouse!') do |format|
         format.html { render 'welcome_email.html.erb' }
         format.text { render plain: 'welcome_email.text.erb' }

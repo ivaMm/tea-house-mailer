@@ -12,7 +12,8 @@ class User < ApplicationRecord
 
   def send_poem
     Poem.create!(build_poem(self))
-    TeaMailer.welcome_email(self).deliver_now!
+    # TeaMailer.welcome_email(self).deliver_now!
+    TeaMailer.with(user: self).welcome_email.deliver_now!
     TeaMailer.daily_poem(self).deliver_now!
   end
 
