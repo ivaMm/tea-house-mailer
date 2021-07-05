@@ -1,3 +1,4 @@
+=begin
 module Devise
   class MailerPreview < ActionMailer::Preview
     def confirmation_instructions
@@ -17,6 +18,7 @@ module Devise
     # end
   end
 end
+=end
 
 # http://localhost:3000/rails/mailers => list of previews
 # http://localhost:3000/rails/mailers/devise/mailer/devise_mailer_preview/confirmation_instructions
