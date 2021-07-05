@@ -1,0 +1,15 @@
+  Hey <%= params[:user].name %>!
+
+  ==============================
+
+  Welcome to Tea House newsletter!
+  This is where you'll get your daily dose of poetry!
+  Stay literate and stay kind!
+
+  <% emojis = '🍷' * rand(6..18) %>
+  <% rand(1..3).times do %>
+    <%= emojis %>
+  <% end %>
+
+  Cheers!
+
