@@ -35,3 +35,13 @@ input[type="checkbox"]:checked {
 input[type="checkbox"]:checked:after {
   background: orange;
 }
+
+a.btn.link-user {
+  color: #fff;
+  text-decoration: none;
+}
+
+a.btn.link-user:hover {
+  color: orange;
+  text-decoration: none;
+}
