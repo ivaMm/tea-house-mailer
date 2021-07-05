@@ -1,7 +1,19 @@
-<p>Hello <%= @resource.email %>!</p>
-
-<p>Your account has been locked due to an excessive number of unsuccessful sign in attempts.</p>
-
-<p>Click the link below to unlock your account:</p>
-
-<p><%= link_to 'Unlock my account', unlock_url(@resource, unlock_token: @token) %></p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body >
+    <div style='background-color: #f5f5f5; color: #fff; text-align: center; margin: 24px; padding: 28px; padding-bottom: 88px; border-radius: 16px;'>
+      <a href='http://www.teahouse.space/' target='_blank' style='font-weight: bold; text-align: center; text-decoration: none; color: orange;'>Visit Tea House</a>
+      <div style='display: flex; justify-content: center; margin-top: 8px;'>
+        <div style='color: #fff; text-align: center; width: 750px; position: relative; margin: 0 auto; padding: 16px 16px 48px 16px; background: url(<%= image_path("babak.jpg") %>); background-color: #221536; border-radius: 16px;'>
+          <h1 style=''>Hello <%= @resource.name %>!</h1>
+          <p style='color: #fff;'>Your account has been locked due to an excessive number of unsuccessful sign in attempts.</p>
+          <p style='color: #fff;'>Click the link below to unlock your account:</p>
+          <p><%= link_to 'Unlock my account', unlock_url(@resource, unlock_token: @token), style:'color: orange;' %></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
