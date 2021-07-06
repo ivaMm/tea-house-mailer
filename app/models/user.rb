@@ -10,6 +10,12 @@ class User < ApplicationRecord
   has_one :poem, dependent: :destroy
   after_create :send_poem
 
+  def self.send_notification
+    User.all.each do |user|
+      TeaMailer.with(user: user).notification.deliver_now!
+    end
+  end
+
   def send_poem
     Poem.create!(build_poem(self))
     # TeaMailer.welcome_email(self).deliver_now!
