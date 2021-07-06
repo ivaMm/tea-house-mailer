@@ -33,7 +33,7 @@ class User < ApplicationRecord
       title = poem['title']
       content = poem['content']
       user.poem.update!(user_id: user.id, author: author, title: title, content: content)
-      TeaMailer.with(user: self).daily_poem.deliver_now!
+      TeaMailer.with(user: user).daily_poem.deliver_now!
     end
   end
 
