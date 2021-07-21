@@ -30,4 +30,15 @@ class TeaMailer < ApplicationMailer
         format.text { render 'notification.text.erb' }
       end
   end
+
+  def custom_email(subject, body)
+    @content = body
+    mail(
+      from: "Tea House Team<teahouseteam@teahouse.space>",
+      to: params[:user].email,
+      subject: subject, body: @content ) do |format|
+        format.html { render 'custom_email.html.erb' }
+        format.text { render 'custom_email.text.erb' }
+      end
+  end
 end

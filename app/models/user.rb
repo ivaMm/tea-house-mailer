@@ -64,4 +64,10 @@ class User < ApplicationRecord
     inx = rand(0...last)
     poems['poems'][inx]['id']
   end
+
+  def self.send_custom_email(subject, body)
+    User.all.each do |user|
+      TeaMailer.with(user: user).custom_email(subject, body).deliver_now!
+    end
+  end
 end
