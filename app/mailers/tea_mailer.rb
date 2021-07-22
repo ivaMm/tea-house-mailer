@@ -1,7 +1,7 @@
 class TeaMailer < ApplicationMailer
   def welcome_email
     mail(
-      from: "Tea House<teahouseteam@teahouse.space>",
+      from: "Tea House Team<teahouseteam@teahouse.space>",
       to: params[:user].email, #@user.email,
       subject: 'Hello from TeaHouse!') do |format|
         format.html { render 'welcome_email.html.erb' }
@@ -18,6 +18,27 @@ class TeaMailer < ApplicationMailer
       subject: "Your daily poem: #{@poem.title}") do |format|
         format.html { render 'daily_poem.html.erb' }
         format.text { render 'daily_poem.text.erb' }
+      end
+  end
+
+  def notification
+    mail(
+      from: "Tea House Team<teahouseteam@teahouse.space>",
+      to: params[:user].email,
+      subject: "Notification") do |format|
+        format.html { render 'notification.html.erb' }
+        format.text { render 'notification.text.erb' }
+      end
+  end
+
+  def custom_email(subject, body)
+    @content = body
+    mail(
+      from: "Tea House Team<teahouseteam@teahouse.space>",
+      to: params[:user].email,
+      subject: subject, body: @content ) do |format|
+        format.html { render 'custom_email.html.erb' }
+        format.text { render 'custom_email.text.erb' }
       end
   end
 end

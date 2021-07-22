@@ -6,6 +6,10 @@ class TeaMailerPreview < ActionMailer::Preview
   def daily_poem
     TeaMailer.with(user: User.first).daily_poem
   end
+
+  def notification
+    TeaMailer.with(user: User.first).notification
+  end
 end
 
 # Preview all emails at http://localhost:3000/rails/mailers/tea_mailer
